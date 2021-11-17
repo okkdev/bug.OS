@@ -11,7 +11,13 @@ config_version=4
 [application]
 
 config/name="bugjam"
+run/main_scene="res://Base.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/size/width=800
+window/size/resizable=false
 
 [physics]
 
