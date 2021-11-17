@@ -1,6 +1,7 @@
 extends Node
 
 var current_pos = {"x": 0, "y": 0}
+var speed_multiplier = 1
 
 func _ready():
   Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -16,14 +17,14 @@ func _process(delta):
   $Sprite.position.y = current_pos.y
 
 func update_y(y):
-  current_pos.y += y
+  current_pos.y += y * speed_multiplier
   if current_pos.y < 0:
     current_pos.y = 0
   elif current_pos.y > OS.window_size.y:
     current_pos.y = OS.window_size.y
     
 func update_x(x):
-  current_pos.x += x
+  current_pos.x += x * speed_multiplier
   if current_pos.x < 0:
     current_pos.x = 0
   elif current_pos.x > OS.window_size.x:
