@@ -1,7 +1,8 @@
-extends Node
+extends KinematicBody2D
 
 export var speed_multiplier = 1
-var current_pos = {"x": 0, "y": 0}
+var current_pos = Vector2()
+var velocity = Vector2()
 
 func _ready():
   Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -11,10 +12,11 @@ func _input(event):
   if event is InputEventMouseMotion:
     update_y(event.relative.y * speed_multiplier)
     update_x(event.relative.x * speed_multiplier)
-
-func _process(delta):
-  self.position.x = current_pos.x
-  self.position.y = current_pos.y
+  
+func _physics_process(delta):
+    self.position.x = current_pos.x
+    self.position.y = current_pos.y
+    move_and_collide(velocity * delta)
 
 func update_y(y):
   current_pos.y += y
