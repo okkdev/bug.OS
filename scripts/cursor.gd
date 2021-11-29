@@ -1,31 +1,19 @@
 extends KinematicBody2D
 
-export var speed_multiplier = 1
-var current_pos = Vector2()
+export var speed = 0.5
+var mouse_motion: Vector2 = Vector2.ZERO
+var mouse_moving: bool = false
 
 func _ready():
   Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-  current_pos = OS.window_size/2
 
 func _input(event):
-  if event is InputEventMouseMotion:
-    update_y(event.relative.y * speed_multiplier)
-    update_x(event.relative.x * speed_multiplier)
+    if event is InputEventMouseMotion:
+        mouse_moving = true
+        mouse_motion = event.relative
 
 func _physics_process(delta):
-  self.position.x = current_pos.x
-  self.position.y = current_pos.y
-
-func update_y(y):
-  current_pos.y += y
-  if current_pos.y < 0:
-    current_pos.y = 0
-  elif current_pos.y > OS.window_size.y:
-    current_pos.y = OS.window_size.y
-    
-func update_x(x):
-  current_pos.x += x
-  if current_pos.x < 0:
-    current_pos.x = 0
-  elif current_pos.x > OS.window_size.x:
-    current_pos.x = OS.window_size.x
+    if mouse_moving:
+        move_and_collide(mouse_motion * speed)
+        mouse_moving = false
+    mouse_motion = Vector2.ZERO
