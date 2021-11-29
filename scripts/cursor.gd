@@ -15,7 +15,6 @@ func _input(event):
 func _physics_process(delta):
   self.position.x = current_pos.x
   self.position.y = current_pos.y
-  move_and_collide(Vector2() * delta)
 
 func update_y(y):
   current_pos.y += y
