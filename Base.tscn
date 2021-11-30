@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/cursor.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/misc.png" type="Texture" id=2]
 [ext_resource path="res://assets/sprites/bugs.png" type="Texture" id=3]
+[ext_resource path="res://scripts/ant.gd" type="Script" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -23,16 +24,16 @@ region_rect = Rect2( 4, 4, 14, 23 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cursor"]
 shape = SubResource( 1 )
 
-[node name="Bug" type="RigidBody2D" parent="."]
-gravity_scale = 0.0
+[node name="Bug" type="KinematicBody2D" parent="."]
+position = Vector2( 200, 200 )
+script = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="Bug"]
-position = Vector2( 291, 176 )
+rotation = 3.14159
 texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 5, 10, 18, 12 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bug"]
-position = Vector2( 291, 176 )
 rotation = -1.5708
 shape = SubResource( 2 )
