@@ -26,13 +26,13 @@ func _integrate_forces(s):
 func _process(delta):
   if Input.is_mouse_button_pressed(1) and hovering:
     grabbing = true
-    $Sprite.frame = 2 
+    $Sprite.frame = 2
+    document.grabbed = true
     document.position = self.position
   elif hovering:
     $Sprite.frame = 1
+    document.grabbed = false    
     grabbing = false
-  else:
-    $Sprite.frame = 0
 
 
 func _on_Area2D_area_entered(area):

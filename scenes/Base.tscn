@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/sprites/icons.png" type="Texture" id=1]
 [ext_resource path="res://scenes/Cursor.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Ant.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/Document.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scripts/trash.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 13.5, 13 )
@@ -27,6 +28,7 @@ speed = 0
 
 [node name="Trash" type="Area2D" parent="."]
 position = Vector2( 20, 20 )
+script = ExtResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="Trash"]
 texture = ExtResource( 1 )
@@ -38,3 +40,6 @@ position = Vector2( -0.5, -2 )
 shape = SubResource( 1 )
 
 [node name="Document" parent="." instance=ExtResource( 4 )]
+
+[connection signal="area_entered" from="Trash" to="Trash" method="_on_Trash_area_entered"]
+[connection signal="area_exited" from="Trash" to="Trash" method="_on_Trash_area_exited"]
