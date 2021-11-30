@@ -1,6 +1,6 @@
-extends KinematicBody2D
+extends RigidBody2D
 
-export (float, -10, 10) var speed: float = 0.8
+export (float, -10000, 10000) var speed: float = 1000
 var velocity: Vector2 = Vector2.ZERO
 
 func _ready():
@@ -11,13 +11,9 @@ func _input(event):
     if event is InputEventMouseMotion:
         velocity = event.relative
 
-func _physics_process(delta):
-    var collision = move_and_collide(velocity * speed, false)
-    if collision:
-#      velocity = velocity.bounce(-collision.normal*10)
-      collision.collider.push(velocity)
-    
-    velocity = Vector2.ZERO
+func _integrate_forces(s):
+  var step = s.get_step()
+  
+  s.set_linear_velocity((velocity * speed) * step)
 
-func push(vector: Vector2):
-  velocity += vector
+  velocity = Vector2.ZERO

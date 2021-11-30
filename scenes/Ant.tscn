@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/sprites/bugs.png" type="Texture" id=1]
+[ext_resource path="res://scripts/ant.gd" type="Script" id=2]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 6.0
+height = 8.0
+
+[node name="Ant" type="RigidBody2D"]
+position = Vector2( 200, 200 )
+z_index = 2
+gravity_scale = 0.0
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+rotation = 3.14159
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 5, 10, 18, 12 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = -1.5708
+shape = SubResource( 2 )

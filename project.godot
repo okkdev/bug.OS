@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="bugjam"
-run/main_scene="res://Base.tscn"
+run/main_scene="res://scenes/Base.tscn"
 config/icon="res://icon.png"
 
 [autoload]

@@ -1,25 +1,18 @@
-extends KinematicBody2D
+extends RigidBody2D
 
-export (int, 0, 1000) var speed: int = 200
+export (int, 0, 500) var speed: int = 120
 var velocity: Vector2 = Vector2.ZERO
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-  pass # Replace with function body.
+  pass
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
-  velocity += position.direction_to(Global.cursor.position) * speed
+func _integrate_forces(s):
+  var step = s.get_step()
   self.look_at(Global.cursor.position)
-  var collision = move_and_collide(velocity * delta)
-  if collision:
-#      mouse_motion = mouse_motion.bounce(-collision.normal*10)
-      collision.collider.push(-(velocity/speed*2))
-      move_and_collide(-velocity * delta)
-      
-  velocity = Vector2.ZERO
+  velocity += position.direction_to(Global.cursor.position) * speed
 
-func push(vector: Vector2):
-  velocity += vector * (speed/2)
+  s.set_linear_velocity((velocity * speed) * step)
+  
+  velocity = Vector2.ZERO

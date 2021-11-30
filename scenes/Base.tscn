@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/sprites/icons.png" type="Texture" id=1]
+[ext_resource path="res://scenes/Cursor.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Ant.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 13.5, 13 )
+
+[node name="Base" type="Node2D"]
+
+[node name="Cursor" parent="." instance=ExtResource( 2 )]
+position = Vector2( 400, 300 )
+
+[node name="Ant" parent="." instance=ExtResource( 3 )]
+
+[node name="Walls" type="StaticBody2D" parent="."]
+visible = false
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls"]
+build_mode = 1
+polygon = PoolVector2Array( 800, 0, 800, 600, 0, 600, 0, 0 )
+
+[node name="Trash" type="Area2D" parent="."]
+position = Vector2( 20, 20 )
+
+[node name="Sprite" type="Sprite" parent="Trash"]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 64, 0, 32, 32 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trash"]
+position = Vector2( -0.5, -2 )
+shape = SubResource( 1 )
