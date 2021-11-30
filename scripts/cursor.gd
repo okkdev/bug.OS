@@ -33,6 +33,8 @@ func _process(delta):
     $Sprite.frame = 1
     document.grabbed = false    
     grabbing = false
+  else:
+    $Sprite.frame = 0
 
 
 func _on_Area2D_area_entered(area):
