@@ -8,7 +8,7 @@ radius = 6.0
 height = 8.0
 
 [node name="Ant" type="RigidBody2D"]
-z_index = 2
+z_index = 5
 gravity_scale = 0.0
 script = ExtResource( 2 )
 
