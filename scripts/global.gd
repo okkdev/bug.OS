@@ -15,6 +15,10 @@ func _unhandled_input(event):
   if event is InputEventKey:
     if event.pressed and event.scancode == KEY_ESCAPE:
       get_tree().quit()
+    if event.pressed and event.scancode == KEY_UP:
+      cursor.speed += 500
+    if event.pressed and event.scancode == KEY_DOWN:
+      cursor.speed -= 500
 
 func _ready():
   randomize()
