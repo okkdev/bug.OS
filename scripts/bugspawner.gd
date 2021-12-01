@@ -9,8 +9,8 @@ func _ready():
 
 func _on_SpawnTimer_timeout():
   spawn_ant()
-  if $SpawnTimer.wait_time != 1:
-    $SpawnTimer.wait_time -= 1
+  if $SpawnTimer.wait_time > 1:
+    $SpawnTimer.wait_time -= 3
 
 func spawn_ant():
   var ant = Ant.instance()

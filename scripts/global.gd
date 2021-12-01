@@ -1,6 +1,7 @@
 extends Node
 
 var cursor = null
+var document = null
 
 const objects_file = "res://assets/words/objects.txt"
 const predicates_file = "res://assets/words/predicates.txt"

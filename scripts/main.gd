@@ -33,6 +33,10 @@ func _process(_delta):
   
   if get_tree().get_nodes_in_group("document").size() == 0 or gameover:
     $Bugs/SpawnTimer.stop()
+    $Cursor.visible = false
+    for b in get_tree().get_nodes_in_group("bug"):
+      b.queue_free()
+    
     var window = Window.instance()
     
     if gameover:

@@ -14,6 +14,7 @@ func _process(_delta):
   if not grabbed and queue_deletion and not $Trashed.playing:
     $Trashed.play()
     self.visible = false
+    Global.document = null
 
 
 func _on_Trashed_finished():

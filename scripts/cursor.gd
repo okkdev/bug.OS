@@ -1,11 +1,10 @@
 extends RigidBody2D
 
-export (float, -10000, 10000) var speed: float = 2000
+export (float, -10000, 10000) var speed: float = 1500
 var velocity: Vector2 = Vector2.ZERO
 var grabbing: bool = false
 var hovering: bool = false
 var in_window: bool = false
-var document = null
 var window = null
 
 
@@ -21,24 +20,24 @@ func _input(event):
 
 func _integrate_forces(s):
   var step = s.get_step()
-  s.set_linear_velocity((velocity * speed) * step)
+  s.set_linear_velocity((velocity * step) * speed)
   velocity = Vector2.ZERO
   
   
 func _process(_delta):
-  if Input.is_mouse_button_pressed(1) and hovering and document:
+  if Input.is_mouse_button_pressed(1) and hovering and Global.document:
     grabbing = true
     $Sprite.frame = 2
-    document.grabbed = true
-    document.position = self.position
+    Global.document.grabbed = true
+    Global.document.position = self.position
   elif Input.is_mouse_button_pressed(1) and hovering and window:
     window.queue_free()
     window = null
     hovering = false
     in_window = false
-  elif hovering and document:
+  elif hovering and Global.document:
     $Sprite.frame = 1
-    document.grabbed = false    
+    Global.document.grabbed = false    
     grabbing = false
   elif hovering:
     $Sprite.frame = 1
@@ -51,7 +50,7 @@ func _on_Area2D_area_entered(area):
   if not grabbing:
     if area.is_in_group("document") and not in_window:
       hovering = true
-      document = area
+      Global.document = area
     if area.is_in_group("window"):
       in_window = true
     if area.is_in_group("close") and in_window:
@@ -63,7 +62,7 @@ func _on_Area2D_area_exited(area):
   if not grabbing:
     if area.is_in_group("document") and not in_window:
       hovering = false
-      document = null
+      Global.document = null
     if area.is_in_group("window"):
       in_window = false
     if area.is_in_group("close") and in_window:
