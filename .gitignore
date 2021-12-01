@@ -10,4 +10,7 @@ export_presets.cfg
 .mono/
 data_*/
 
+# Releases
+release/
+
 .DS_Store

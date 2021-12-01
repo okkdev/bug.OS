@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-export (float, -10000, 10000) var speed: float = 1000
+export (float, -10000, 10000) var speed: float = 2000
 var velocity: Vector2 = Vector2.ZERO
 var grabbing: bool = false
 var hovering: bool = false
