@@ -25,7 +25,7 @@ func _integrate_forces(s):
   velocity = Vector2.ZERO
   
   
-func _process(delta):
+func _process(_delta):
   if Input.is_mouse_button_pressed(1) and hovering and document:
     grabbing = true
     $Sprite.frame = 2
@@ -34,6 +34,7 @@ func _process(delta):
   elif Input.is_mouse_button_pressed(1) and hovering and window:
     window.queue_free()
     window = null
+    hovering = false
     in_window = false
   elif hovering and document:
     $Sprite.frame = 1
