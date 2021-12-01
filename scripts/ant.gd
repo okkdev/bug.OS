@@ -17,7 +17,7 @@ func _integrate_forces(s):
   
   self.look_at(cursor_pos + fuzzy)
   velocity += position.direction_to(cursor_pos + fuzzy) * speed
-
+  
   s.set_linear_velocity((velocity * speed) * step)
   
   velocity = Vector2.ZERO

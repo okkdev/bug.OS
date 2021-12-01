@@ -79,6 +79,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Time" type="Label" parent="Taskbar"]
+margin_left = 732.0
+margin_top = 580.0
+margin_right = 794.0
+margin_bottom = 594.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "09:00 am"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Splash" type="Node2D" parent="."]
 z_index = 100
 script = ExtResource( 8 )
@@ -92,5 +105,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="GameOver" type="Timer" parent="."]
+wait_time = 60.0
+autostart = true
+
 [connection signal="timeout" from="Bugs/SpawnTimer" to="Bugs" method="_on_SpawnTimer_timeout"]
 [connection signal="finished" from="Splash/Boot" to="Splash" method="_on_Boot_finished"]
+[connection signal="timeout" from="GameOver" to="." method="_on_GameOver_timeout"]

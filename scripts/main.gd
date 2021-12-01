@@ -4,6 +4,7 @@ const Trash = preload("res://scenes/Trash.tscn")
 const Window = preload("res://scenes/Window.tscn")
 
 var win_pos: Vector2 = Vector2(100, 100)
+var gameover: bool = false
 
 func _ready():
   var trash = Trash.instance()
@@ -14,7 +15,7 @@ func _ready():
 
   var window = Window.instance()
   window.get_node("Body").text = """Welcome %s!
-We here at Flowers Inc. are glad to have you on board! Your new job here will be to manage files and clean out old, unused ones. Beware the OS might be a bit buggy.
+We here at Flowers Inc. are glad to have you on board! Your new job here will be to manage files and clean out old, unused ones. Beware the OS might be a bit buggy. Please be done by 10am.
 
 Flowers Inc.
 """ % Global.username
@@ -24,10 +25,24 @@ Flowers Inc.
 
 
 func _process(_delta):
-  if get_tree().get_nodes_in_group("document").size() == 0:
+  if gameover:
+    $Taskbar/Time.text = "10:00 am"
+  else:
+    var time = int(60 - $GameOver.time_left)
+    $Taskbar/Time.text = "09:" + (String(time) if time > 9 else "0" + String(time)) + " am"
+  
+  if get_tree().get_nodes_in_group("document").size() == 0 or gameover:
     $Bugs/SpawnTimer.stop()
     var window = Window.instance()
-    window.get_node("Body").text = """
+    
+    if gameover:
+        window.get_node("Body").text = """
+What?! You're not done yet?
+
+YOU'RE FIRED!
+"""
+    else:
+      window.get_node("Body").text = """
 Thanks for your hard work today.
       
 See you tomorrow.
@@ -36,3 +51,7 @@ See you tomorrow.
     add_child(window)
     win_pos = Vector2(fmod((win_pos.x + 10), OS.window_size.x), fmod((win_pos.y + 10), OS.window_size.y))
 
+
+
+func _on_GameOver_timeout():
+  gameover = true
