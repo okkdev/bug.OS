@@ -35,3 +35,4 @@ See you tomorrow.
     window.position = win_pos
     add_child(window)
     win_pos = Vector2(fmod((win_pos.x + 10), OS.window_size.x), fmod((win_pos.y + 10), OS.window_size.y))
+

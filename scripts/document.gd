@@ -1,7 +1,7 @@
 extends Area2D
 
-var grabbed:bool = false
-var queue_deletion:bool = false
+var grabbed: bool = false
+var queue_deletion: bool = false
 
 func _ready():
   $Sprite.frame = randi() % $Sprite.get_sprite_frames().get_frame_count("default")
@@ -11,5 +11,10 @@ func _ready():
     $Label.text = Global.objects[randi() % Global.objects.size()]
     
 func _process(_delta):
-  if not grabbed and queue_deletion:
-    queue_free()
+  if not grabbed and queue_deletion and not $Trashed.playing:
+    $Trashed.play()
+    self.visible = false
+
+
+func _on_Trashed_finished():
+  queue_free()
