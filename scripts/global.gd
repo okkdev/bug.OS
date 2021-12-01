@@ -2,8 +2,9 @@ extends Node
 
 var cursor = null
 
-onready var objects_file = "res://assets/words/objects.txt"
-onready var predicates_file = "res://assets/words/predicates.txt"
+const objects_file = "res://assets/words/objects.txt"
+const predicates_file = "res://assets/words/predicates.txt"
+
 var objects: Array = []
 var predicates: Array = []
 

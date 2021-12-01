@@ -1,9 +1,15 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
+[ext_resource path="res://assets/sprites/taskbar.png" type="Texture" id=1]
 [ext_resource path="res://scenes/Cursor.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/main.gd" type="Script" id=3]
 [ext_resource path="res://scripts/bugspawner.gd" type="Script" id=4]
 [ext_resource path="res://scripts/documentspawner.gd" type="Script" id=6]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 800, 0, 0, 0, 0, 0, 800, 600, 0, 0, 0, 0, 0, 600, 0, 0, 0, 0, 0, 0 )
+}
 
 [node name="Base" type="Node2D"]
 script = ExtResource( 3 )
@@ -41,5 +47,16 @@ script = ExtResource( 4 )
 [node name="SpawnTimer" type="Timer" parent="Bugs"]
 wait_time = 10.0
 autostart = true
+
+[node name="Spawn" type="Path2D" parent="Bugs"]
+curve = SubResource( 1 )
+
+[node name="SpawnPath" type="PathFollow2D" parent="Bugs/Spawn"]
+
+[node name="Taskbar" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Taskbar"]
+position = Vector2( 400, 587 )
+texture = ExtResource( 1 )
 
 [connection signal="timeout" from="Bugs/SpawnTimer" to="Bugs" method="_on_SpawnTimer_timeout"]
