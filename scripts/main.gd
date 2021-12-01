@@ -5,6 +5,7 @@ const Window = preload("res://scenes/Window.tscn")
 
 var win_pos: Vector2 = Vector2(100, 100)
 var gameover: bool = false
+var error: int = 200
 
 func _ready():
   var trash = Trash.instance()
@@ -46,14 +47,20 @@ What?! You're not done yet?
 YOU'RE FIRED!
 """
     else:
+      $GameOver.stop()
       window.get_node("Body").text = """
 Thanks for your hard work today.
       
 See you tomorrow.
 """
-    window.position = win_pos
-    add_child(window)
-    win_pos = Vector2(fmod((win_pos.x + 10), OS.window_size.x), fmod((win_pos.y + 10), OS.window_size.y))
+    if error > 1:
+      window.position = win_pos
+      add_child(window)
+      win_pos = Vector2(fmod((win_pos.x + 10), OS.window_size.x), fmod((win_pos.y + 10), OS.window_size.y))
+    elif error == 1:
+      window.position = OS.window_size/2
+      add_child(window)
+    error -= 1
 
 
 
