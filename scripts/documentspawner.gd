@@ -1,6 +1,6 @@
 extends Node2D
 
-export (int, 1, 50) var amount:int = 10
+export (int, 1, 50) var amount:int = 15
 const Document = preload("res://scenes/Document.tscn")
 
 func _ready():
