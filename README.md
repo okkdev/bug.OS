@@ -4,3 +4,5 @@ https://okkdev.itch.io/bugos
 
 Submitted to Github GameOff 2021 GameJam\
 https://itch.io/jam/game-off-2021
+
+Little game dev experience and first time working with Godot :)
